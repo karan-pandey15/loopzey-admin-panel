@@ -17,7 +17,7 @@ export function sendLoginOtp(email) {
 export function verifyLoginOtp({ email, otp }) {
   return apiClient.post('/api/Auth/VerifyOtp/verify-otp', {
     email,
-    mobileNo: null,
+    mobileNo: "",
     otp,
   });
 }
