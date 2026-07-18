@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled),
+a,
+[role="button"] {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+html.dark {
+  color-scheme: dark;
+  background: #020617;
+}
+
+html.dark body {
+  background: #020617;
+}
+
+/* Shared dark palette for the reusable utility-based admin surfaces. */
+.dark .bg-white {
+  background-color: #0f172a;
+}
+
+.dark .bg-slate-50,
+.dark .bg-slate-50\/70,
+.dark .bg-slate-50\/80 {
+  background-color: #020617;
+}
+
+.dark .bg-slate-100 {
+  background-color: #1e293b;
+}
+
+.dark .border-slate-100,
+.dark .border-slate-200,
+.dark .border-slate-300 {
+  border-color: #273449;
+}
+
+.dark .divide-slate-100 > :not(:last-child) {
+  border-color: #1e293b;
+}
+
+.dark .text-slate-950,
+.dark .text-slate-900 {
+  color: #f8fafc;
+}
+
+.dark .text-slate-700,
+.dark .text-slate-600 {
+  color: #cbd5e1;
+}
+
+.dark .text-slate-500,
+.dark .text-slate-400 {
+  color: #94a3b8;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+  color: #f8fafc;
+  background-color: #0b172a;
+  border-color: #334155;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748b;
+}
+
+.dark .hover\:bg-slate-50\/70:hover,
+.dark .hover\:bg-slate-100:hover {
+  background-color: #172033;
+}
+
+.dark .shadow-slate-200\/40 {
+  --tw-shadow-color: rgb(2 6 23 / 0.4);
+}
+
+.dark .bg-red-50,
+.dark .bg-red-400\/10 {
+  background-color: rgb(239 68 68 / 0.12);
+}
+
+.dark .bg-emerald-50,
+.dark .bg-emerald-400\/10 {
+  background-color: rgb(16 185 129 / 0.12);
+}
+
+.dark .bg-blue-50 {
+  background-color: rgb(59 130 246 / 0.12);
+}
+
+.dark .bg-violet-50 {
+  background-color: rgb(139 92 246 / 0.12);
+}
+
+.dark .bg-pink-50 {
+  background-color: rgb(236 72 153 / 0.12);
+}
+
+.dark .bg-amber-50,
+.dark .bg-yellow-50 {
+  background-color: rgb(245 158 11 / 0.12);
+}
+
+.dark .text-red-700 {
+  color: #fca5a5;
+}
+
+.dark .text-emerald-700 {
+  color: #6ee7b7;
+}
+
+.dark .text-blue-700 {
+  color: #93c5fd;
+}
+
+.dark .text-amber-700,
+.dark .text-yellow-700 {
+  color: #fde68a;
+}
