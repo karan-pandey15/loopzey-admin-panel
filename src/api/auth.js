@@ -10,7 +10,7 @@ export function login({ userName, password }) {
 export function sendLoginOtp(email) {
   return apiClient.post('/api/Common/sendotp-mail', {
     email,
-    mobileNo: null,
+    mobileNo: "",
   });
 }
 
