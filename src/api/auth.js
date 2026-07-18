@@ -7,6 +7,21 @@ export function login({ userName, password }) {
   });
 }
 
+export function sendLoginOtp(email) {
+  return apiClient.post('/api/Common/sendotp-mail', {
+    email,
+    mobileNo: null,
+  });
+}
+
+export function verifyLoginOtp({ email, otp }) {
+  return apiClient.post('/api/Auth/VerifyOtp/verify-otp', {
+    email,
+    mobileNo: null,
+    otp,
+  });
+}
+
 export function registerAdmin({ username, email, mobileNo, password }) {
   return apiClient.post('/api/Auth/AdminRegistration/admin-registration', {
     username,
