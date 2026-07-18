@@ -12,5 +12,5 @@ export function updateSetting({ settingKey, settingValue }) {
 }
 
 export function getSettingHistory(settingKey) {
-  return apiClient.get(`/api/AdminSettings/history/${settingKey}`);
+  return apiClient.get(`/api/AdminSettings/history/${encodeURIComponent(settingKey)}`);
 }
