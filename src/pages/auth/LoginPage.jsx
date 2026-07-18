@@ -103,7 +103,10 @@ export default function LoginPage() {
 
       <p className="mt-7 text-center text-sm text-slate-400">
         Need an administrator account?{' '}
-        <Link className="font-semibold text-yellow-300 hover:text-yellow-200" to="/signup">
+        <Link
+          className="inline-flex min-h-11 items-center px-1 font-semibold text-yellow-600 hover:text-yellow-500 dark:text-yellow-300 dark:hover:text-yellow-200"
+          to="/signup"
+        >
           Register
         </Link>
       </p>

@@ -13,7 +13,11 @@ function renderValue(value) {
   }
 
   if (typeof value === 'object') {
-    return <span className="text-xs text-slate-500">{JSON.stringify(value)}</span>;
+    return (
+      <span className="line-clamp-3 break-all text-xs text-slate-500">
+        {JSON.stringify(value)}
+      </span>
+    );
   }
 
   return String(value);

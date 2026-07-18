@@ -18,7 +18,7 @@ export default function ConfirmDialog({
   const isDanger = tone === 'danger';
 
   return (
-    <div className="fixed inset-0 z-[70] grid place-items-center p-4">
+    <div className="fixed inset-0 z-[70] grid place-items-center overflow-y-auto p-3 sm:p-4">
       <button
         aria-label="Close dialog"
         className="absolute inset-0 bg-slate-950/65 backdrop-blur-sm"
@@ -27,12 +27,12 @@ export default function ConfirmDialog({
       />
       <section
         aria-modal="true"
-        className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl"
+        className="relative my-auto max-h-[calc(100dvh-1.5rem)] w-full max-w-md overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-6"
         role="dialog"
       >
         <button
           aria-label="Close dialog"
-          className="absolute right-4 top-4 grid size-8 place-items-center rounded-lg text-slate-400 hover:bg-slate-100"
+          className="absolute right-3 top-3 grid size-11 place-items-center rounded-xl text-slate-400 hover:bg-slate-100"
           disabled={isLoading}
           onClick={onClose}
           type="button"
@@ -51,7 +51,7 @@ export default function ConfirmDialog({
         {children && <div className="mt-4">{children}</div>}
         <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <button
-            className="h-10 rounded-xl border border-slate-200 px-4 text-sm font-semibold text-slate-700"
+            className="min-h-11 rounded-xl border border-slate-200 px-4 text-sm font-semibold text-slate-700"
             disabled={isLoading}
             onClick={onClose}
             type="button"
@@ -59,7 +59,7 @@ export default function ConfirmDialog({
             Cancel
           </button>
           <button
-            className={`flex h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold text-white ${
+            className={`flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold text-white ${
               isDanger ? 'bg-red-600 hover:bg-red-500' : 'bg-slate-900 hover:bg-slate-800'
             }`}
             disabled={isLoading}

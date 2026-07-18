@@ -55,14 +55,6 @@ export function deleteReel(reelId) {
   return apiClient.delete(`/api/Admin/reels/${reelId}`);
 }
 
-export function getRoleApprovals(params) {
-  return apiClient.get('/api/Admin/role-approvals', { params });
-}
-
-export function updateRoleApproval(approvalId, request) {
-  return apiClient.put(`/api/Admin/role-approvals/${approvalId}`, request);
-}
-
 export function getReports({ PageNumber, PageSize, Status }) {
   return apiClient.get('/api/Admin/reports', {
     params: {

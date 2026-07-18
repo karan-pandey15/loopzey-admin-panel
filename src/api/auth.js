@@ -15,3 +15,23 @@ export function registerAdmin({ username, email, mobileNo, password }) {
     password,
   });
 }
+
+export function getPendingApprovals() {
+  return apiClient.get('/api/Auth/PendingApprovals/pending-approvals');
+}
+
+export function updateApproval({
+  approvalId,
+  approvalStatus,
+  approvedBy,
+  rejectionReason,
+}) {
+  const payload = {
+    approvalId,
+    approvalStatus,
+    approvedBy,
+    rejectionReason,
+  };
+
+  return apiClient.post('/api/Auth/UpdateApproval/update-role-approval', payload);
+}

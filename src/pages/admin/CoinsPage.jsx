@@ -179,7 +179,7 @@ export default function CoinsPage() {
         action={
           <div className="flex flex-col gap-2 sm:flex-row">
             <button
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold"
               onClick={loadPendingKyc}
               type="button"
             >
@@ -187,7 +187,7 @@ export default function CoinsPage() {
               Pending KYC
             </button>
             <button
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 text-sm font-semibold text-white"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 text-sm font-semibold text-white"
               onClick={() => setOperation('add')}
               type="button"
             >
@@ -231,14 +231,14 @@ export default function CoinsPage() {
                 className="rounded-2xl border border-slate-200 bg-white p-5"
                 key={label}
               >
-                <div className="flex items-center justify-between">
-                  <div>
+                <div className="flex items-center justify-between gap-3">
+                  <div className="min-w-0">
                     <p className="text-sm text-slate-500">{label}</p>
-                    <p className="mt-2 text-2xl font-bold text-slate-950">
+                    <p className="mt-2 break-all text-2xl font-bold tabular-nums text-slate-950">
                       {value.toLocaleString()}
                     </p>
                   </div>
-                  <div className="grid size-10 place-items-center rounded-xl bg-yellow-50 text-yellow-600">
+                  <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-yellow-50 text-yellow-600">
                     <Icon className="size-5" />
                   </div>
                 </div>
@@ -283,17 +283,17 @@ export default function CoinsPage() {
       )}
 
       {operation && (
-        <div className="fixed inset-0 z-[70] grid place-items-center overflow-y-auto p-4">
+        <div className="fixed inset-0 z-[70] grid place-items-center overflow-y-auto p-3 sm:p-4">
           <button
             aria-label="Close coin operation"
             className="fixed inset-0 bg-slate-950/65 backdrop-blur-sm"
             onClick={() => setOperation(null)}
             type="button"
           />
-          <section className="relative my-6 w-full max-w-3xl rounded-2xl bg-white p-6 shadow-2xl">
+          <section className="relative my-3 w-full max-w-3xl rounded-2xl bg-white p-5 shadow-2xl sm:my-6 sm:p-6">
             <button
               aria-label="Close coin operation"
-              className="absolute right-4 top-4 grid size-8 place-items-center rounded-lg text-slate-400 hover:bg-slate-100"
+              className="absolute right-3 top-3 grid size-11 place-items-center rounded-xl text-slate-400 hover:bg-slate-100"
               onClick={() => setOperation(null)}
               type="button"
             >
@@ -367,7 +367,7 @@ export default function CoinsPage() {
                         label: 'Actions',
                         render: (item) => (
                           <button
-                            className="rounded-lg px-2.5 py-1.5 text-xs font-semibold text-blue-700 hover:bg-blue-50 disabled:opacity-40"
+                            className="min-h-11 rounded-xl px-3 py-2 text-xs font-semibold text-blue-700 hover:bg-blue-50 disabled:opacity-40"
                             disabled={!item.kycId}
                             onClick={() => setSelectedKyc(item)}
                             type="button"
@@ -395,7 +395,7 @@ export default function CoinsPage() {
       )}
 
       {selectedKyc && (
-        <div className="fixed inset-0 z-[80] grid place-items-center p-4">
+        <div className="fixed inset-0 z-[80] grid place-items-center overflow-y-auto p-3 sm:p-4">
           <button
             aria-label="Close KYC decision"
             className="absolute inset-0 bg-slate-950/70"
@@ -403,10 +403,18 @@ export default function CoinsPage() {
             type="button"
           />
           <form
-            className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl"
+            className="relative my-auto max-h-[calc(100dvh-1.5rem)] w-full max-w-md overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-6"
             onSubmit={submitKycDecision}
           >
-            <h2 className="text-lg font-bold text-slate-950">Verify KYC</h2>
+            <button
+              aria-label="Close KYC decision"
+              className="absolute right-3 top-3 grid size-11 place-items-center rounded-xl text-slate-400 hover:bg-slate-100"
+              onClick={() => setSelectedKyc(null)}
+              type="button"
+            >
+              <X className="size-4" />
+            </button>
+            <h2 className="pr-12 text-lg font-bold text-slate-950">Verify KYC</h2>
             <label className="mt-5 flex items-center gap-2 text-sm font-semibold text-slate-700">
               <input
                 checked={isApproved}

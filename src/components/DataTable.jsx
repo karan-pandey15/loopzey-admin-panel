@@ -29,13 +29,13 @@ export default function DataTable({ columns, getRowKey, rows }) {
           >
             {columns.map((column) => (
               <div
-                className="grid grid-cols-[minmax(90px,0.38fr)_minmax(0,0.62fr)] gap-3 border-b border-slate-100 px-4 py-3 last:border-b-0"
+                className="grid grid-cols-[minmax(76px,0.34fr)_minmax(0,0.66fr)] gap-2 border-b border-slate-100 px-3 py-3 last:border-b-0 sm:grid-cols-[minmax(100px,0.38fr)_minmax(0,0.62fr)] sm:gap-3 sm:px-4"
                 key={column.key}
               >
-                <p className="text-xs font-bold uppercase tracking-wide text-slate-400">
+                <p className="break-words text-[10px] font-bold uppercase tracking-wide text-slate-400 sm:text-xs">
                   {column.label}
                 </p>
-                <div className="min-w-0 break-words text-right text-sm text-slate-700">
+                <div className="min-w-0 overflow-hidden break-words text-right text-sm text-slate-700">
                   {column.render ? column.render(row) : renderCell(row[column.key])}
                 </div>
               </div>
@@ -46,7 +46,7 @@ export default function DataTable({ columns, getRowKey, rows }) {
 
       <div className="hidden overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm shadow-slate-200/40 md:block">
         <div className="overflow-x-auto">
-        <table className="w-full min-w-[760px] border-collapse text-left text-sm">
+          <table className="w-full min-w-[760px] border-collapse text-left text-sm">
           <thead>
             <tr className="border-b border-slate-200 bg-slate-50/80">
               {columns.map((column) => (
@@ -70,7 +70,7 @@ export default function DataTable({ columns, getRowKey, rows }) {
               </tr>
             ))}
           </tbody>
-        </table>
+          </table>
         </div>
       </div>
     </>

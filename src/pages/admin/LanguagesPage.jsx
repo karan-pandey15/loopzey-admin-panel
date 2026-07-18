@@ -107,7 +107,7 @@ export default function LanguagesPage() {
       render: (language) => (
         <div className="flex justify-end gap-1 md:justify-start">
           <button
-            className="grid size-8 place-items-center rounded-lg text-slate-500 hover:bg-blue-50 hover:text-blue-600"
+            className="grid size-11 place-items-center rounded-xl text-slate-500 hover:bg-blue-50 hover:text-blue-600"
             onClick={() => openEditor(language.languageId)}
             title="Edit language"
             type="button"
@@ -115,7 +115,7 @@ export default function LanguagesPage() {
             <Pencil className="size-4" />
           </button>
           <button
-            className="grid size-8 place-items-center rounded-lg text-slate-500 hover:bg-red-50 hover:text-red-600"
+            className="grid size-11 place-items-center rounded-xl text-slate-500 hover:bg-red-50 hover:text-red-600"
             onClick={() => setLanguageToDelete(language)}
             title="Delete language"
             type="button"
@@ -132,7 +132,7 @@ export default function LanguagesPage() {
       <PageHeader
         action={
           <button
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 text-sm font-semibold text-white"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 text-sm font-semibold text-white"
             onClick={openCreate}
             type="button"
           >
@@ -165,7 +165,7 @@ export default function LanguagesPage() {
       )}
 
       {form && (
-        <div className="fixed inset-0 z-[70] grid place-items-center overflow-y-auto p-4">
+        <div className="fixed inset-0 z-[70] grid place-items-center overflow-y-auto p-3 sm:p-4">
           <button
             aria-label="Close language form"
             className="fixed inset-0 bg-slate-950/65 backdrop-blur-sm"
@@ -173,18 +173,18 @@ export default function LanguagesPage() {
             type="button"
           />
           <form
-            className="relative my-6 w-full max-w-xl rounded-2xl bg-white p-6 shadow-2xl"
+            className="relative my-3 w-full max-w-xl rounded-2xl bg-white p-5 shadow-2xl sm:my-6 sm:p-6"
             onSubmit={submitLanguage}
           >
             <button
               aria-label="Close language form"
-              className="absolute right-4 top-4 grid size-8 place-items-center rounded-lg text-slate-400 hover:bg-slate-100"
+              className="absolute right-3 top-3 grid size-11 place-items-center rounded-xl text-slate-400 hover:bg-slate-100"
               onClick={() => setForm(null)}
               type="button"
             >
               <X className="size-4" />
             </button>
-            <h2 className="text-lg font-bold text-slate-950">
+            <h2 className="pr-12 text-lg font-bold text-slate-950">
               {form.languageId ? 'Edit language' : 'Add language'}
             </h2>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">

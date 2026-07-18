@@ -92,7 +92,7 @@ export default function ContentPage({ type }) {
       key: 'content',
       label: isReels ? 'Reel' : 'Post',
       render: (item) => (
-        <div className="flex min-w-64 items-center gap-3">
+        <div className="flex min-w-0 items-center gap-2 md:min-w-64 md:gap-3">
           <div className="size-12 shrink-0 overflow-hidden rounded-xl bg-slate-100">
             {item.thumbnailUrl || item.mediaUrl ? (
               <img
@@ -116,7 +116,7 @@ export default function ContentPage({ type }) {
       key: 'engagement',
       label: 'Engagement',
       render: (item) => (
-        <div className="flex items-center gap-3 whitespace-nowrap text-xs text-slate-500">
+        <div className="flex flex-wrap items-center justify-end gap-2 text-xs text-slate-500 md:justify-start md:gap-3 md:whitespace-nowrap">
           <span className="inline-flex items-center gap-1">
             <Eye className="size-3.5" /> {item.views}
           </span>
@@ -140,7 +140,7 @@ export default function ContentPage({ type }) {
       label: 'Actions',
       render: (item) => (
         <button
-          className="inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50"
+          className="inline-flex min-h-11 items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold text-red-600 hover:bg-red-50"
           onClick={() => setSelectedItem(item)}
           type="button"
         >
@@ -195,7 +195,7 @@ export default function ContentPage({ type }) {
       {!isLoading && !error && rows.length > 0 && (
         <>
           <DataTable columns={columns} getRowKey={(item) => item[idKey]} rows={rows} />
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-slate-500">
               Page {page} of {totalPages} · {totalCount} {type}
             </p>

@@ -86,7 +86,7 @@ function Sidebar({ onClose, responsiveWidth = false }) {
   return (
     <aside
       className={`flex h-full flex-col bg-[#071426] text-slate-300 ${
-        responsiveWidth ? 'w-full' : 'w-72'
+        responsiveWidth ? 'w-full' : 'w-[calc(100vw-2rem)] max-w-72'
       }`}
     >
       <Brand />
@@ -167,11 +167,11 @@ export default function AdminLayout() {
             onClick={() => setIsOpen(false)}
             type="button"
           />
-          <div className="relative h-full w-72 shadow-2xl">
+          <div className="relative h-full w-[calc(100vw-2rem)] max-w-72 shadow-2xl">
             <Sidebar onClose={() => setIsOpen(false)} />
             <button
               aria-label="Close navigation"
-              className="absolute right-3 top-4 grid size-9 place-items-center rounded-lg text-slate-400 hover:bg-white/5 hover:text-white"
+              className="absolute right-2 top-3 grid size-11 place-items-center rounded-xl text-slate-400 hover:bg-white/5 hover:text-white"
               onClick={() => setIsOpen(false)}
               type="button"
             >
@@ -182,11 +182,11 @@ export default function AdminLayout() {
       )}
 
       <div className="min-w-0">
-        <header className="sticky top-0 z-20 flex h-18 items-center justify-between border-b border-slate-200/80 bg-white/90 px-4 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/90 sm:px-6 lg:px-8">
+        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-slate-200/80 bg-white/90 px-3 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/90 sm:h-18 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
             <button
               aria-label="Open navigation"
-              className="grid size-10 place-items-center rounded-xl border border-slate-200 text-slate-600 lg:hidden"
+              className="grid size-11 place-items-center rounded-xl border border-slate-200 text-slate-600 lg:hidden"
               onClick={() => setIsOpen(true)}
               type="button"
             >
@@ -202,7 +202,7 @@ export default function AdminLayout() {
           <div className="flex items-center gap-2">
             <button
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-              className="grid size-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-100 dark:text-slate-300"
+              className="grid size-11 place-items-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-100 dark:text-slate-300"
               onClick={toggleTheme}
               title={isDark ? 'Light mode' : 'Dark mode'}
               type="button"
@@ -216,7 +216,7 @@ export default function AdminLayout() {
           </div>
         </header>
 
-        <main className="min-w-0 w-full p-4 sm:p-6 lg:p-8">
+        <main className="w-full min-w-0 p-3 sm:p-6 lg:p-8">
           <Outlet />
         </main>
       </div>

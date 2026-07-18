@@ -44,7 +44,7 @@ export default function AuthLayout({ children }) {
     <main className="relative min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <button
         aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-        className="absolute right-5 top-5 z-20 grid size-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+        className="absolute right-4 top-4 z-20 grid size-11 place-items-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 sm:right-5 sm:top-5"
         onClick={toggleTheme}
         title={isDark ? 'Light mode' : 'Dark mode'}
         type="button"

@@ -30,6 +30,7 @@ body,
 body {
   min-height: 100vh;
   background: #f8fafc;
+  overflow-x: hidden;
 }
 
 button,

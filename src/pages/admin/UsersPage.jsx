@@ -92,7 +92,7 @@ export default function UsersPage() {
       key: 'user',
       label: 'User',
       render: (user) => (
-        <div className="flex min-w-56 items-center gap-3">
+        <div className="flex min-w-0 items-center gap-2 md:min-w-56 md:gap-3">
           <div className="grid size-10 shrink-0 place-items-center overflow-hidden rounded-full bg-slate-100 text-slate-500">
             {user.profileImageUrl ? (
               <img
@@ -150,10 +150,10 @@ export default function UsersPage() {
       key: 'actions',
       label: 'Actions',
       render: (user) => (
-        <div className="flex justify-end gap-1 md:justify-start">
+        <div className="flex flex-wrap justify-end gap-1 md:justify-start">
           <button
             aria-label={`View ${user.username}`}
-            className="grid size-8 place-items-center rounded-lg text-slate-500 hover:bg-blue-50 hover:text-blue-600"
+            className="grid size-11 place-items-center rounded-xl text-slate-500 hover:bg-blue-50 hover:text-blue-600"
             onClick={() => setSelectedUserId(user.userId)}
             title="View profile, followers, and following"
             type="button"
@@ -162,7 +162,7 @@ export default function UsersPage() {
           </button>
           <button
             aria-label={user.isActive ? `Deactivate ${user.username}` : `Activate ${user.username}`}
-            className="grid size-8 place-items-center rounded-lg text-slate-500 hover:bg-amber-50 hover:text-amber-700"
+            className="grid size-11 place-items-center rounded-xl text-slate-500 hover:bg-amber-50 hover:text-amber-700"
             onClick={() => setAction({ type: 'active', user })}
             title={user.isActive ? 'Deactivate user' : 'Activate user'}
             type="button"
@@ -171,7 +171,7 @@ export default function UsersPage() {
           </button>
           <button
             aria-label={user.isBanned ? `Unban ${user.username}` : `Ban ${user.username}`}
-            className="grid size-8 place-items-center rounded-lg text-slate-500 hover:bg-orange-50 hover:text-orange-700"
+            className="grid size-11 place-items-center rounded-xl text-slate-500 hover:bg-orange-50 hover:text-orange-700"
             onClick={() => setAction({ type: 'ban', user })}
             title={user.isBanned ? 'Unban user' : 'Ban user'}
             type="button"
@@ -180,7 +180,7 @@ export default function UsersPage() {
           </button>
           <button
             aria-label={`Delete ${user.username}`}
-            className="grid size-8 place-items-center rounded-lg text-slate-500 hover:bg-red-50 hover:text-red-600"
+            className="grid size-11 place-items-center rounded-xl text-slate-500 hover:bg-red-50 hover:text-red-600"
             onClick={() => setAction({ type: 'delete', user })}
             title="Delete user"
             type="button"
@@ -236,7 +236,7 @@ export default function UsersPage() {
       {!isLoading && !error && rows.length > 0 && (
         <>
           <DataTable columns={columns} getRowKey={(user) => user.userId} rows={rows} />
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-slate-500">
               Page {page} of {totalPages} · {totalCount} users
             </p>

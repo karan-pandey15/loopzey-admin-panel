@@ -90,7 +90,11 @@ export default function UserDetailsDialog({ onClose, userId }) {
         onClick={onClose}
         type="button"
       />
-      <aside className="relative h-full w-full max-w-2xl overflow-y-auto bg-white p-5 shadow-2xl sm:p-7">
+      <aside
+        aria-modal="true"
+        className="relative h-full w-full max-w-2xl overscroll-contain overflow-y-auto bg-white p-5 shadow-2xl sm:p-7"
+        role="dialog"
+      >
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs font-bold uppercase tracking-wide text-yellow-600">
@@ -100,7 +104,7 @@ export default function UserDetailsDialog({ onClose, userId }) {
           </div>
           <button
             aria-label="Close user details"
-            className="grid size-9 place-items-center rounded-xl border border-slate-200 text-slate-500"
+            className="grid size-11 place-items-center rounded-xl border border-slate-200 text-slate-500"
             onClick={onClose}
             type="button"
           >

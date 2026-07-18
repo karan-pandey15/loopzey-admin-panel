@@ -11,6 +11,7 @@ import {
 import {
   bulkUpdateTranslations,
   exportTranslations,
+  getLanguages,
   getLanguageTranslations,
   getMissingTranslations,
   getTranslationKeys,
@@ -45,7 +46,13 @@ export default function TranslationsPage() {
     () => getTranslationKeys(search || undefined),
     [search],
   );
+  const {
+    data: languagesData,
+    error: languagesError,
+    isLoading: languagesLoading,
+  } = useAsyncData(() => getLanguages(true), []);
   const keys = Array.isArray(data) ? data : [];
+  const languages = Array.isArray(languagesData) ? languagesData : [];
 
   function submitSearch(event) {
     event.preventDefault();
@@ -118,7 +125,7 @@ export default function TranslationsPage() {
       await importTranslations(languageCode, importFile);
       setOperation(null);
       setImportFile(null);
-      setActionMessage('Translation file imported successfully.');
+      setActionMessage(`Translation file imported successfully for ${languageCode}.`);
     } catch (requestError) {
       setOperationError(
         requestError.response?.status
@@ -169,7 +176,7 @@ export default function TranslationsPage() {
       <PageHeader
         action={
           <button
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 text-sm font-semibold text-white"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 text-sm font-semibold text-white"
             onClick={() => setOperation('single')}
             type="button"
           >
@@ -184,12 +191,13 @@ export default function TranslationsPage() {
 
       <section className="rounded-2xl border border-slate-200 bg-white p-4">
         <div className="flex flex-col gap-3 xl:flex-row xl:items-end">
-          <label className="block xl:w-40">
+          <label className="block xl:w-64">
             <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-500">
-              Language code
+              Language
             </span>
-            <input
-              className="h-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm outline-none focus:border-yellow-500"
+            <select
+              className="min-h-11 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm outline-none focus:border-yellow-500"
+              disabled={languagesLoading || languages.length === 0}
               onChange={(event) => {
                 setLanguageCode(event.target.value);
                 setTranslationForm((current) => ({
@@ -198,11 +206,21 @@ export default function TranslationsPage() {
                 }));
               }}
               value={languageCode}
-            />
+            >
+              {languagesLoading && <option value="">Loading languages…</option>}
+              {!languagesLoading && languages.length === 0 && (
+                <option value="">No languages available</option>
+              )}
+              {languages.map((language) => (
+                <option key={language.languageId} value={language.languageCode}>
+                  {language.nativeName} — {language.languageName} ({language.languageCode})
+                </option>
+              ))}
+            </select>
           </label>
-          <div className="grid flex-1 grid-cols-2 gap-2 sm:grid-cols-3 xl:flex">
+          <div className="grid flex-1 grid-cols-1 gap-2 min-[400px]:grid-cols-2 sm:grid-cols-3 xl:flex">
             <button
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 text-xs font-semibold"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold leading-4"
               onClick={() => loadLanguageData('language')}
               type="button"
             >
@@ -210,7 +228,7 @@ export default function TranslationsPage() {
               Language values
             </button>
             <button
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 text-xs font-semibold"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold leading-4"
               onClick={() => loadLanguageData('missing')}
               type="button"
             >
@@ -218,7 +236,7 @@ export default function TranslationsPage() {
               Missing values
             </button>
             <button
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 text-xs font-semibold"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold leading-4"
               onClick={() => setOperation('bulk')}
               type="button"
             >
@@ -226,7 +244,7 @@ export default function TranslationsPage() {
               Bulk update
             </button>
             <button
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 text-xs font-semibold"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold leading-4"
               onClick={() => setOperation('import')}
               type="button"
             >
@@ -234,7 +252,7 @@ export default function TranslationsPage() {
               Import
             </button>
             <button
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 text-xs font-semibold"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold leading-4"
               disabled={isOperating}
               onClick={downloadExport}
               type="button"
@@ -246,6 +264,11 @@ export default function TranslationsPage() {
         </div>
         {operationError && !operation && (
           <p className="mt-3 rounded-xl bg-red-50 p-3 text-sm text-red-700">{operationError}</p>
+        )}
+        {languagesError && (
+          <p className="mt-3 rounded-xl bg-red-50 p-3 text-sm text-red-700">
+            Unable to load languages: {languagesError}
+          </p>
         )}
       </section>
 
@@ -287,23 +310,23 @@ export default function TranslationsPage() {
       )}
 
       {operation && (
-        <div className="fixed inset-0 z-[70] grid place-items-center overflow-y-auto p-4">
+        <div className="fixed inset-0 z-[70] grid place-items-center overflow-y-auto p-3 sm:p-4">
           <button
             aria-label="Close translation dialog"
             className="fixed inset-0 bg-slate-950/65 backdrop-blur-sm"
             onClick={() => setOperation(null)}
             type="button"
           />
-          <section className="relative my-6 w-full max-w-3xl rounded-2xl bg-white p-6 shadow-2xl">
+          <section className="relative my-3 w-full max-w-3xl rounded-2xl bg-white p-5 shadow-2xl sm:my-6 sm:p-6">
             <button
               aria-label="Close translation dialog"
-              className="absolute right-4 top-4 grid size-8 place-items-center rounded-lg text-slate-400 hover:bg-slate-100"
+              className="absolute right-3 top-3 grid size-11 place-items-center rounded-xl text-slate-400 hover:bg-slate-100"
               onClick={() => setOperation(null)}
               type="button"
             >
               <X className="size-4" />
             </button>
-            <h2 className="text-lg font-bold text-slate-950">
+            <h2 className="pr-12 text-lg font-bold text-slate-950">
               {operation === 'single'
                 ? 'Add translation'
                 : operation === 'bulk'
@@ -389,18 +412,48 @@ export default function TranslationsPage() {
               </form>
             )}
             {!isOperating && operation === 'import' && (
-              <form className="mt-5" onSubmit={submitImport}>
-                <input
-                  className="w-full rounded-xl border border-dashed border-slate-300 p-5 text-sm"
-                  onChange={(event) => setImportFile(event.target.files?.[0] || null)}
-                  required
-                  type="file"
-                />
+              <form className="mt-5 space-y-4" onSubmit={submitImport}>
+                <label className="block">
+                  <span className="mb-2 block text-sm font-semibold text-slate-700">
+                    Import into language
+                  </span>
+                  <select
+                    className="min-h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-yellow-500"
+                    disabled={languagesLoading || languages.length === 0}
+                    onChange={(event) => setLanguageCode(event.target.value)}
+                    required
+                    value={languageCode}
+                  >
+                    {languages.map((language) => (
+                      <option key={language.languageId} value={language.languageCode}>
+                        {language.nativeName} — {language.languageName} (
+                        {language.languageCode})
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block">
+                  <span className="mb-2 block text-sm font-semibold text-slate-700">
+                    Translation file
+                  </span>
+                  <input
+                    className="w-full rounded-xl border border-dashed border-slate-300 p-3 text-xs sm:p-5 sm:text-sm"
+                    onChange={(event) => setImportFile(event.target.files?.[0] || null)}
+                    required
+                    type="file"
+                  />
+                </label>
+                {importFile && (
+                  <div className="rounded-xl bg-slate-50 p-3 text-xs text-slate-600">
+                    Selected file: <strong>{importFile.name}</strong>
+                  </div>
+                )}
                 <button
-                  className="mt-4 h-11 w-full rounded-xl bg-slate-900 text-sm font-semibold text-white"
+                  className="h-11 w-full rounded-xl bg-slate-900 text-sm font-semibold text-white disabled:opacity-50"
+                  disabled={!languageCode || !importFile || isOperating}
                   type="submit"
                 >
-                  Import file
+                  Import into {languageCode || 'language'}
                 </button>
               </form>
             )}

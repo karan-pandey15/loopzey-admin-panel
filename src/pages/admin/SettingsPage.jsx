@@ -72,19 +72,23 @@ function SettingToggle({ checked, disabled, onChange }) {
   return (
     <button
       aria-checked={checked}
-      className={`relative h-7 w-12 shrink-0 rounded-full transition ${
-        checked ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-slate-700'
-      } disabled:opacity-50`}
+      className="grid min-h-11 min-w-14 shrink-0 place-items-center rounded-xl disabled:opacity-50"
       disabled={disabled}
       onClick={onChange}
       role="switch"
       type="button"
     >
       <span
-        className={`absolute top-1 size-5 rounded-full bg-white shadow-sm transition ${
-          checked ? 'left-6' : 'left-1'
+        className={`relative h-7 w-12 rounded-full transition ${
+          checked ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-slate-700'
         }`}
-      />
+      >
+        <span
+          className={`absolute top-1 size-5 rounded-full bg-white shadow-sm transition ${
+            checked ? 'left-6' : 'left-1'
+          }`}
+        />
+      </span>
     </button>
   );
 }
@@ -197,7 +201,7 @@ export default function SettingsPage() {
       <PageHeader
         action={
           <button
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-yellow-400 hover:text-slate-950 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:text-white"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-yellow-400 hover:text-slate-950 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:text-white"
             onClick={reload}
             type="button"
           >
@@ -431,7 +435,7 @@ export default function SettingsPage() {
                                       Restart required
                                     </span>
                                   )}
-                                  <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-slate-400">
+                                  <span className="inline-flex w-full items-center gap-1 text-[10px] text-slate-400 sm:ml-auto sm:w-auto">
                                     <Clock3 className="size-3" />
                                     {formatDate(setting.updatedAt)}
                                   </span>
@@ -439,7 +443,7 @@ export default function SettingsPage() {
 
                                 <div className="mt-3 flex items-center justify-end gap-1 border-t border-slate-200 pt-3 dark:border-slate-800">
                                   <button
-                                    className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white"
+                                    className="inline-flex min-h-11 items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white"
                                     onClick={() => openHistory(setting.settingKey)}
                                     type="button"
                                   >
@@ -448,7 +452,7 @@ export default function SettingsPage() {
                                   </button>
                                   {setting.isEditable && !isBoolean && (
                                     <button
-                                      className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-blue-600 transition hover:bg-blue-50 dark:text-blue-300 dark:hover:bg-blue-400/10"
+                                      className="inline-flex min-h-11 items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold text-blue-600 transition hover:bg-blue-50 dark:text-blue-300 dark:hover:bg-blue-400/10"
                                       onClick={() => openEditor(setting)}
                                       type="button"
                                     >
@@ -473,7 +477,7 @@ export default function SettingsPage() {
       )}
 
       {editing && (
-        <div className="fixed inset-0 z-[70] grid place-items-center p-4">
+        <div className="fixed inset-0 z-[70] grid place-items-center overflow-y-auto p-3 sm:p-4">
           <button
             aria-label="Close setting editor"
             className="absolute inset-0 bg-slate-950/70 backdrop-blur-sm"
@@ -481,7 +485,7 @@ export default function SettingsPage() {
             type="button"
           />
           <form
-            className="relative w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:p-7"
+            className="relative my-auto max-h-[calc(100dvh-1.5rem)] w-full max-w-lg overflow-y-auto rounded-3xl border border-slate-200 bg-white p-5 shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:p-7"
             onSubmit={saveSetting}
           >
             <button
@@ -513,7 +517,8 @@ export default function SettingsPage() {
               />
             </label>
             <div className="mt-3 rounded-xl bg-slate-50 p-3 text-xs text-slate-500 dark:bg-slate-950">
-              Default value: <strong>{editing.defaultValue || '—'}</strong>
+              Default value:{' '}
+              <strong className="break-all">{editing.defaultValue || '—'}</strong>
             </div>
             {dialogError && (
               <p className="mt-3 rounded-xl bg-red-50 p-3 text-sm text-red-700">

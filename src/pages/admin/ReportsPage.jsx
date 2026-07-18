@@ -115,7 +115,7 @@ export default function ReportsPage() {
                 label: 'Actions',
                 render: (report) => (
                   <button
-                    className="inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-emerald-700 hover:bg-emerald-50 disabled:opacity-40"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold text-emerald-700 hover:bg-emerald-50 disabled:opacity-40"
                     disabled={!report.reportId}
                     onClick={() => setSelectedReport(report)}
                     type="button"
@@ -128,7 +128,7 @@ export default function ReportsPage() {
             ]}
             rows={reports}
           />
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-slate-500">Page {PageNumber}</p>
             <div className="flex gap-2">
               <button
@@ -153,7 +153,7 @@ export default function ReportsPage() {
       )}
 
       {selectedReport && (
-        <div className="fixed inset-0 z-[70] grid place-items-center p-4">
+        <div className="fixed inset-0 z-[70] grid place-items-center overflow-y-auto p-3 sm:p-4">
           <button
             aria-label="Close resolution dialog"
             className="absolute inset-0 bg-slate-950/65 backdrop-blur-sm"
@@ -161,12 +161,12 @@ export default function ReportsPage() {
             type="button"
           />
           <form
-            className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl"
+            className="relative my-auto max-h-[calc(100dvh-1.5rem)] w-full max-w-md overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-6"
             onSubmit={submitResolution}
           >
             <button
               aria-label="Close resolution dialog"
-              className="absolute right-4 top-4 grid size-8 place-items-center rounded-lg text-slate-400 hover:bg-slate-100"
+              className="absolute right-3 top-3 grid size-11 place-items-center rounded-xl text-slate-400 hover:bg-slate-100"
               onClick={() => setSelectedReport(null)}
               type="button"
             >

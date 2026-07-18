@@ -236,7 +236,7 @@ export default function DashboardPage() {
               <p className="relative mt-2 text-sm leading-6 text-slate-400">
                 Open the moderation queues and keep community reviews moving.
               </p>
-              <div className="relative mt-6 grid grid-cols-2 gap-3">
+              <div className="relative mt-6 grid grid-cols-1 gap-3 min-[380px]:grid-cols-2">
                 <Link
                   className="group rounded-xl border border-white/5 bg-white/5 p-3 transition hover:border-yellow-400/30 hover:bg-yellow-400/10"
                   to="/role-approvals"
@@ -296,7 +296,7 @@ export default function DashboardPage() {
                   <div className="mt-5 flex flex-wrap gap-2">
                     {links.map((link) => (
                       <Link
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-yellow-400 hover:bg-yellow-50 hover:text-slate-950 dark:border-slate-700 dark:text-slate-300 dark:hover:border-yellow-500/50 dark:hover:bg-yellow-400/10 dark:hover:text-white"
+                        className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-yellow-400 hover:bg-yellow-50 hover:text-slate-950 dark:border-slate-700 dark:text-slate-300 dark:hover:border-yellow-500/50 dark:hover:bg-yellow-400/10 dark:hover:text-white"
                         key={link.to}
                         to={link.to}
                       >
@@ -315,31 +315,31 @@ export default function DashboardPage() {
               className="group flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-violet-300 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-violet-500/40"
               to="/translations"
             >
-              <div className="flex items-center gap-4">
-                <div className="grid size-11 place-items-center rounded-xl bg-violet-50 text-violet-600 dark:bg-violet-400/10 dark:text-violet-300">
+              <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+                <div className="grid size-11 shrink-0 place-items-center rounded-xl bg-violet-50 text-violet-600 dark:bg-violet-400/10 dark:text-violet-300">
                   <MessageSquareText className="size-5" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <h3 className="font-bold text-slate-950">Translation workspace</h3>
                   <p className="mt-1 text-sm text-slate-500">Keys, values, import, and export</p>
                 </div>
               </div>
-              <ArrowRight className="size-5 text-slate-300 transition group-hover:translate-x-1 group-hover:text-violet-500" />
+              <ArrowRight className="size-5 shrink-0 text-slate-300 transition group-hover:translate-x-1 group-hover:text-violet-500" />
             </Link>
             <Link
               className="group flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-amber-300 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-amber-500/40"
               to="/settings"
             >
-              <div className="flex items-center gap-4">
-                <div className="grid size-11 place-items-center rounded-xl bg-amber-50 text-amber-600 dark:bg-amber-400/10 dark:text-amber-300">
+              <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+                <div className="grid size-11 shrink-0 place-items-center rounded-xl bg-amber-50 text-amber-600 dark:bg-amber-400/10 dark:text-amber-300">
                   <Settings className="size-5" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <h3 className="font-bold text-slate-950">System configuration</h3>
                   <p className="mt-1 text-sm text-slate-500">Feature flags and runtime settings</p>
                 </div>
               </div>
-              <ArrowRight className="size-5 text-slate-300 transition group-hover:translate-x-1 group-hover:text-amber-500" />
+              <ArrowRight className="size-5 shrink-0 text-slate-300 transition group-hover:translate-x-1 group-hover:text-amber-500" />
             </Link>
           </section>
         </>
