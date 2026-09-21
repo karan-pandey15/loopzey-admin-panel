@@ -3,7 +3,7 @@ import axios from 'axios';
 export const AUTH_TOKEN_KEY = 'loopzey_admin_token';
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://api.sellifyy.com',
+  baseURL: 'https://sellifyy-001-site8.itempurl.com',
   headers: {
     'Content-Type': 'application/json',
   },
