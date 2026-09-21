@@ -13,7 +13,7 @@ import PageHeader from '../../components/PageHeader';
 import useAsyncData from '../../hooks/useAsyncData';
 
 const PAGE_SIZE = 10;
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.sellifyy.com';
+const API_BASE_URL ='https://sellifyy-001-site8.itempurl.com';
 
 function assetUrl(path) {
   if (!path || path.startsWith('http://') || path.startsWith('https://')) {
